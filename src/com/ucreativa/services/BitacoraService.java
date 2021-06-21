@@ -5,6 +5,7 @@ import com.ucreativa.Entities.TodoTerreno;
 import com.ucreativa.Entities.Vehiculo;
 import com.ucreativa.repositories.Repo;
 
+import java.util.Date;
 import java.util.List;
 
 public class BitacoraService {
@@ -15,8 +16,11 @@ public class BitacoraService {
         this.repo = repo;
     }
 
-    public  void save(String brand, String model, String date, String id,
-                      String color, boolean status) {
+    public void save(String brand, String model, String txtId, String color, boolean status) {
+
+
+        int id = Integer.parseInt(txtId);
+
 
         Vehiculo vehiculo;
         if (status) {
@@ -24,9 +28,12 @@ public class BitacoraService {
         } else {
             vehiculo = new TodoTerreno(brand, model, id, color, status);
         }
-        this.repo.save(vehiculo,brand, model, date, id);
+        this.repo.save(vehiculo, brand, model,txtId, color, new Date());
     }
+
     public List<String> get() {
         return  this.repo.get();
     }
+
+
 }//end
